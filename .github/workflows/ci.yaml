@@ -75,7 +75,7 @@ jobs:
   deploy-to-staging:
     name: Deploy to Pollination Staging
     runs-on: ubuntu-latest
-    needs: [generate-app-name, release-on-github]
+    needs: release-on-github
     if: ${{github.ref == 'refs/heads/master' && github.event.repository.owner.name == 'pollination-apps' && contains(needs.release-on-github.outputs.tag, '.')}}
     steps:
       - uses: actions/checkout@v2
@@ -102,9 +102,9 @@ jobs:
           TAG=$(echo "${TAG:?}" | sed 's/[[:space:]]//g')
           TAG=${TAG%%-*}
 
-          echo pollination-apps deploy app --tag $TAG --owner pollination --name "${{needs.generate-app-name.outputs.app-name}}" --environment staging --public --message "${{github.event.commits[0].message}}" 
+          echo pollination-apps deploy app --tag $TAG --environment staging --public --message "${{github.event.commits[0].message}}" 
 
-          pollination-apps deploy app --tag $TAG --owner pollination --name "${{needs.generate-app-name.outputs.app-name}}" --environment staging --public --message "${{github.event.commits[0].message}}" 
+          pollination-apps deploy app --tag $TAG --environment staging --public --message "${{github.event.commits[0].message}}" 
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
