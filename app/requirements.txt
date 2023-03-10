@@ -1,7 +1,6 @@
 streamlit==1.17.0
-honeybee-display==0.2.17
-ladybug-vtk==0.13.9
-pollination-streamlit==0.5.0
+honeybee-display[full]==0.2.17
+pollination-streamlit>=0.5.2
 pollination_streamlit_io>=0.49.0
 pollination_streamlit_viewer==0.4.7
 honeybee-radiance==1.64.150
