@@ -28,10 +28,6 @@ def main():
         st.tabs(['Load run', 'Summary report', 'Space by space breakdown', 'Visualization'])
 
     load_method = {True: 'Load from production', False: 'Load from URL'}
-    query_params = st.experimental_get_query_params()
-    if 'url' in query_params:
-        st.session_state['load_method'] = False
-        st.session_state['default_url'] = query_params['url'][0]
     with run_tab:
         st.radio(
             'Load method', options=[True, False],
