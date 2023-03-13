@@ -74,12 +74,18 @@ def process_summary(credits: dict):
     with st.expander('See model breakdown', expanded=True):
         df = pd.DataFrame.from_dict(credits, orient='index', columns=['values'])
         st.table(df.style)
+        csv = df.to_csv(index=False, float_format='%.2f')
+        st.download_button('Download', csv, 'summary.csv', 'text/csv',
+                           key='download_summary')
 
 
 def process_space(space_summary: dict):
     st.header('Space by space breakdown')
     df = pd.read_csv(space_summary)
     st.table(df.style)
+    csv = df.to_csv(index=False, float_format='%.2f')
+    st.download_button('Download', csv, 'summary_space.csv', 'text/csv',
+                        key='download_summary_space')
     
 
 def select_menu(api_client: ApiClient, user: dict):
