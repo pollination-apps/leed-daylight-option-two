@@ -2,7 +2,7 @@
 import streamlit as st
 from packaging import version
 
-from pollination_streamlit.selectors import get_api_client
+from pollination_streamlit.selectors import get_api_client, run_selector
 from pollination_streamlit_io import auth_user
 from pollination_streamlit_viewer import viewer
 
@@ -25,12 +25,28 @@ def main():
 
     # set up tabs
     run_tab, summary_tab, space_tab, visualization_tab = \
-        st.tabs(['Get run', 'Summary report', 'Space by space breakdown', 'Visualization'])
+        st.tabs(['Load run', 'Summary report', 'Space by space breakdown', 'Visualization'])
 
+    load_method = {True: 'Load from production', False: 'Load from URL'}
+    query_params = st.experimental_get_query_params()
+    if 'url' in query_params:
+        st.session_state['load_method'] = False
+        st.session_state['default_url'] = query_params['url'][0]
     with run_tab:
+        st.radio(
+            'Load method', options=[True, False],
+            format_func=lambda x: load_method[x], horizontal=True,
+            label_visibility='collapsed', key='load_method'
+        )
         api_client = get_api_client()
         user = auth_user('auth-user', api_client)
-        run = select_menu(api_client, user)
+        if st.session_state['load_method']:
+            run = select_menu(api_client, user)
+        else:
+            run = run_selector(
+                api_client, default=st.session_state['default_url'],
+                help='Paste run URL.'
+            )
 
     if run is not None:
         if run.status.status.value != 'Succeeded':
