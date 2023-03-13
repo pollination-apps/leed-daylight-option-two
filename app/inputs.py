@@ -7,5 +7,14 @@ def initialize():
     # initialize session state variables
     if 'target_folder' not in st.session_state:
         st.session_state.target_folder = Path(__file__).parent
+
+    query_params = st.experimental_get_query_params()
+    if 'load_method' not in st.session_state:
+        if 'url' in query_params:
+            st.session_state.load_method = False
+            st.session_state.default_url = query_params['url'][0]
+        else:
+            st.session_state.load_method = True
+
     if 'default_url' not in st.session_state:
         st.session_state.default_url = None
