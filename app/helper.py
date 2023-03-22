@@ -53,7 +53,7 @@ def download_files(run: Run) -> None:
             json.dump(data, fp, indent=4)
 
     vs = model_to_vis_set(
-        hb_model, color_by=None, include_wireframe=True,
+        hb_model, color_by=None,
         grid_data_path=str(data_folder), active_grid_data='illuminance-9am'
     )
     vtk_vs = VTKVisualizationSet.from_visualization_set(vs)
@@ -71,18 +71,27 @@ def process_summary(credits: dict):
     credit_text = f'<h2 style="color:{color};">LEED Credits: {points} points</h2>'
     st.markdown(credit_text, unsafe_allow_html=True)
     st.markdown(f'### Percentage passing: {round(credits["percentage_passing"], 2)}%')
-    with st.expander('See model breakdown', expanded=True):
-        df = pd.DataFrame.from_dict(credits, orient='index', columns=['values'])
-        st.table(df.style)
-        csv = df.to_csv(index=False, float_format='%.2f')
-        st.download_button('Download', csv, 'summary.csv', 'text/csv',
-                           key='download_summary')
+
+    st.header('Model breakdown')
+    df = pd.DataFrame.from_dict(credits, orient='index', columns=['values'])
+    row_names = df.index.to_list()
+    row_names = [' '.join(w[0].upper() + w[1:] for w in x.split('_')) for x in row_names]
+    df.index = row_names
+    st.table(df.style.format('{:.2f}'))
+    csv = df.to_csv(index=False, float_format='%.2f')
+    st.download_button('Download', csv, 'summary.csv', 'text/csv',
+                        key='download_summary')
 
 
 def process_space(space_summary: dict):
     st.header('Space by space breakdown')
     df = pd.read_csv(space_summary)
-    st.table(df.style)
+    round_columns = [
+        'Area (m2)', 'Area (ft2)', 'Spacing (m)', '% Passing 9AM', 
+        '% Passing 3PM', '% Passing Combined'
+    ]
+    style_round = {column: '{:.2f}' for column in round_columns}
+    st.table(df.style.format(style_round))
     csv = df.to_csv(index=False, float_format='%.2f')
     st.download_button('Download', csv, 'summary_space.csv', 'text/csv',
                         key='download_summary_space')
@@ -105,29 +114,38 @@ def select_menu(api_client: ApiClient, user: dict):
             project = select_project(
                 'select-project',
                 api_client,
-                project_owner=username
+                project_owner=username,
+                default_project_id=st.session_state['project_id']
             )
 
             if project and 'name' in project:
+                st.session_state['project_id'] = project['id']
+                
                 st.subheader('Select a study:')
                 study = select_study(
                     'select-study',
                     api_client,
                     project_name=project['name'],
-                    project_owner=username
+                    project_owner=username,
+                    default_study_id=st.session_state['study_id']
                 )
                 
                 if study and 'id' in study:
+                    st.session_state['study_id'] = study['id']
+                    
                     st.subheader('Select a run for study ' + study['id'] + ' :')
                     run = select_run(
                         'select-run',
                         api_client,
                         project_name=project['name'],
                         project_owner=username,
-                        job_id=study['id']
+                        job_id=study['id'],
+                        default_run_id=st.session_state['run_id']
                     )
 
                     if run is not None:
+                        st.session_state['run_id'] = run['id']
+                        
                         project_owner = username
                         project_name = project['name']
                         job_id = study['id']
