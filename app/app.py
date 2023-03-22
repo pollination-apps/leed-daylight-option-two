@@ -12,7 +12,7 @@ from inputs import initialize
 
 
 st.set_page_config(
-    page_title='LEED Daylight Option II', layout='wide',
+    page_title='LEED Daylight Option II',
     page_icon='https://app.pollination.cloud/favicon.ico'
 )
 
@@ -23,12 +23,8 @@ def main():
     # initialize session state variables
     initialize()
 
-    # set up tabs
-    run_tab, summary_tab, space_tab, visualization_tab = \
-        st.tabs(['Load run', 'Summary report', 'Space by space breakdown', 'Visualization'])
-
     load_method = {True: 'Load from production', False: 'Load from URL'}
-    with run_tab:
+    with st.expander('Load results', expanded=st.session_state['expanded']):
         st.radio(
             'Load method', options=[True, False],
             format_func=lambda x: load_method[x], horizontal=True,
@@ -45,6 +41,8 @@ def main():
             )
 
     if run is not None:
+        # close expander
+        st.session_state.expanded = False
         if run.status.status.value != 'Succeeded':
             st.error(
                 'The run status must be \'Succeeded\'. '
@@ -67,14 +65,9 @@ def main():
         with st.spinner('Downloading files...'):
             vtjks_file, credits, space_summary = download_files(run)
 
-        with summary_tab:
-            process_summary(credits)
-
-        with space_tab:
-            process_space(space_summary)
-        
-        with visualization_tab:
-            viewer(content=vtjks_file.read_bytes(), key='viz')
+        process_summary(credits)
+        process_space(space_summary)
+        viewer(content=vtjks_file.read_bytes(), key='viz')
 
 if __name__ == '__main__':
     main()
