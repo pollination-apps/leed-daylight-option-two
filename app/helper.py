@@ -62,7 +62,7 @@ def download_files(run: Run) -> None:
     return vtjks_file, credits, space_summary
 
 
-def process_summary(credits: dict):
+def leed_credits(credits: dict):
     points = credits['credits']
     if points > 1:
         color = 'Green'
@@ -72,6 +72,7 @@ def process_summary(credits: dict):
     st.markdown(credit_text, unsafe_allow_html=True)
     st.markdown(f'### Percentage passing: {round(credits["percentage_passing"], 2)}%')
 
+def process_summary(credits: dict):
     st.header('Model breakdown')
     df = pd.DataFrame.from_dict(credits, orient='index', columns=['values'])
     row_names = df.index.to_list()
@@ -79,8 +80,10 @@ def process_summary(credits: dict):
     df.index = row_names
     st.table(df.style.format('{:.2f}'))
     csv = df.to_csv(index=False, float_format='%.2f')
-    st.download_button('Download', csv, 'summary.csv', 'text/csv',
-                        key='download_summary')
+    st.download_button(
+        'Download model breakdown', csv, 'summary.csv', 'text/csv',
+        key='download_model_breakdown'
+    )
 
 
 def process_space(space_summary: dict):
@@ -93,8 +96,10 @@ def process_space(space_summary: dict):
     style_round = {column: '{:.2f}' for column in round_columns}
     st.table(df.style.format(style_round))
     csv = df.to_csv(index=False, float_format='%.2f')
-    st.download_button('Download', csv, 'summary_space.csv', 'text/csv',
-                        key='download_summary_space')
+    st.download_button(
+        'Download space by space breakdown', csv, 'summary_space.csv',
+        'text/csv', key='download_summary_space'
+    )
     
 
 def select_menu(api_client: ApiClient, user: dict):
@@ -151,6 +156,22 @@ def select_menu(api_client: ApiClient, user: dict):
                         job_id = study['id']
                         run_id = run['id']
                         run = Run(project_owner, project_name, job_id, run_id, api_client)
-                        return run
+                        run_url = f'{run._client.host}/{run.owner}/projects/{run.project}/studies/{run.job_id}/runs/{run.id}'
+                        st.experimental_set_query_params(url=run_url)
+                        st.session_state.run_url = run_url
+                        st.session_state.active_option = 'Load from URL'
+                        st.session_state['run'] = run
                     else:
-                        return None
+                        st.session_state['run'] = None
+
+
+def load_sample():
+    sample_folder = Path(f'{st.session_state.target_folder}/sample')
+
+    with open(sample_folder.joinpath('credit-summary', 'credit_summary.json')) as json_file:
+        credits = json.load(json_file)
+    space_summary = sample_folder.joinpath('space-summary', 'space_summary.csv')
+
+    vtjks_file = Path(sample_folder, 'vis_set.vtkjs')
+
+    return vtjks_file, credits, space_summary
