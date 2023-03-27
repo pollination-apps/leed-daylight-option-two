@@ -1,0 +1,99 @@
+{
+    "type": "VisualizationMetaData",
+    "data_type": {
+        "name": "Illuminance 3pm",
+        "data_type": "Illuminance",
+        "type": "DataType"
+    },
+    "unit": "lux",
+    "legend_parameters": {
+        "continuous_legend": false,
+        "decimal_count": 2,
+        "include_larger_smaller": false,
+        "vertical": true,
+        "font": "Arial",
+        "colors": [
+            {
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 53,
+                "g": 0,
+                "b": 202,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 107,
+                "g": 0,
+                "b": 148,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 160,
+                "g": 0,
+                "b": 95,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 214,
+                "g": 0,
+                "b": 41,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 12,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 66,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 119,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 173,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 226,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            },
+            {
+                "r": 255,
+                "g": 255,
+                "b": 0,
+                "a": 255,
+                "type": "Color"
+            }
+        ],
+        "min": 300,
+        "max": 3000,
+        "ordinal_dictionary": null,
+        "type": "LegendParameters"
+    }
+}

@@ -8,16 +8,23 @@ def initialize():
     if 'target_folder' not in st.session_state:
         st.session_state.target_folder = Path(__file__).parent
 
+    if 'load_method' not in st.session_state:
+        st.session_state.active_option = 'Select study'
+    if 'active_option' not in st.session_state:
+        st.session_state.active_option = 'Select study'
+    if 'options' not in st.session_state:
+        st.session_state.options = ['Select study', 'Load from URL', 'Sample']
+
     query_params = st.experimental_get_query_params()
     if 'load_method' not in st.session_state:
         if 'url' in query_params:
-            st.session_state.load_method = False
-            st.session_state.default_url = query_params['url'][0]
+            st.session_state.load_method = 'Load from URL'
+            st.session_state.run_url = query_params['url'][0]
         else:
-            st.session_state.load_method = True
+            st.session_state.load_method = 'Select study'
 
-    if 'default_url' not in st.session_state:
-        st.session_state.default_url = None
+    if 'run_url' not in st.session_state:
+        st.session_state.run_url = None
 
     if 'expanded' not in st.session_state:
         st.session_state.expanded = True
@@ -28,3 +35,5 @@ def initialize():
         st.session_state.study_id = None
     if 'run_id' not in st.session_state:
         st.session_state.run_id = None
+    if 'run' not in st.session_state:
+        st.session_state.run = None
