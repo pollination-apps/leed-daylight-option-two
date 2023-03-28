@@ -23,22 +23,24 @@ def main():
     # initialize session state variables
     initialize()
 
-    with st.expander('Load results', expanded=st.session_state.expanded):
+    with st.expander('Select study', expanded=st.session_state.expanded):
         st.radio(
             'Load method', options=st.session_state.options,
             horizontal=True, label_visibility='collapsed', key='load_method',
             index=st.session_state.options.index(st.session_state.active_option)
         )
-        api_client = get_api_client()
-        user = auth_user('auth-user', api_client)
-        if st.session_state['load_method'] == 'Select study':
-            select_menu(api_client, user)
-        elif st.session_state['load_method'] == 'Load from URL':
-            run = run_selector(
-                api_client, default=st.session_state['run_url'],
-                help='Paste run URL.'
-            )
-            st.session_state['run'] = run
+        
+        if st.session_state['load_method'] != 'Sample':
+            api_client = get_api_client()
+            user = auth_user('auth-user', api_client)
+            if st.session_state['load_method'] == 'Load from project':
+                select_menu(api_client, user)
+            elif st.session_state['load_method'] == 'Load from URL':
+                run = run_selector(
+                    api_client, default=st.session_state['run_url'],
+                    help='Paste run URL.'
+                )
+                st.session_state['run'] = run
         else:
             # get sample files
             vtjks_file, credits, space_summary = load_sample()
