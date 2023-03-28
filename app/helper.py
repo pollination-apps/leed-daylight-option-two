@@ -167,7 +167,6 @@ def select_menu(api_client: ApiClient, user: dict):
 
 def load_sample():
     sample_folder = Path(f'{st.session_state.target_folder}/sample')
-
     with open(sample_folder.joinpath('credit-summary', 'credit_summary.json')) as json_file:
         credits = json.load(json_file)
     space_summary = sample_folder.joinpath('space-summary', 'space_summary.csv')
