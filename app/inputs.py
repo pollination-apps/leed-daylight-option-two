@@ -9,9 +9,11 @@ def initialize():
         st.session_state.target_folder = Path(__file__).parent
 
     if 'active_option' not in st.session_state:
-        st.session_state.active_option = 'Load from project'
+        st.session_state.active_option = 'Load from a project'
     if 'options' not in st.session_state:
-        st.session_state.options = ['Load from project', 'Load from URL', 'Sample']
+        st.session_state.options = [
+            'Load from a project', 'Load from a URL', 'Try the sample run'
+        ]
 
     query_params = st.experimental_get_query_params()
     if 'load_method' not in st.session_state:
