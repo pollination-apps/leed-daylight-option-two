@@ -6,8 +6,9 @@ from pollination_streamlit.selectors import get_api_client, run_selector
 from pollination_streamlit_io import auth_user
 from pollination_streamlit_viewer import viewer
 
-from helper import (download_files, select_menu, leed_credits, process_summary,
-    process_space, load_sample)
+from helper import (
+    download_files, select_menu, leed_credits, process_summary, process_space,
+    load_sample)
 from inputs import initialize
 
 
@@ -16,26 +17,28 @@ st.set_page_config(
     page_icon='https://app.pollination.cloud/favicon.ico'
 )
 
+
 def main():
     # title
     st.header('LEED Daylight Option II')
-    
+
     # initialize session state variables
     initialize()
 
-    with st.expander('Select study', expanded=st.session_state.expanded):
+    with st.expander('Select a study', expanded=st.session_state.expanded):
         st.radio(
             'Load method', options=st.session_state.options,
             horizontal=True, label_visibility='collapsed', key='load_method',
-            index=st.session_state.options.index(st.session_state.active_option)
+            index=st.session_state.options.index(
+                st.session_state.active_option)
         )
-        
-        if st.session_state['load_method'] != 'Sample':
+
+        if st.session_state['load_method'] != 'Try the sample run':
             api_client = get_api_client()
             user = auth_user('auth-user', api_client)
-            if st.session_state['load_method'] == 'Load from project':
+            if st.session_state['load_method'] == 'Load from a project':
                 select_menu(api_client, user)
-            elif st.session_state['load_method'] == 'Load from URL':
+            elif st.session_state['load_method'] == 'Load from a URL':
                 run = run_selector(
                     api_client, default=st.session_state['run_url'],
                     help='Paste run URL.'
@@ -45,10 +48,11 @@ def main():
             # get sample files
             vtjks_file, credits, space_summary = load_sample()
 
-    if st.session_state['run'] is not None or st.session_state['load_method'] == 'Sample':
+    if st.session_state['run'] is not None \
+            or st.session_state['load_method'] == 'Try the sample run':
         # close expander
         st.session_state.expanded = False
-        if st.session_state['load_method'] != 'Sample':
+        if st.session_state['load_method'] != 'Try the sample run':
             run = st.session_state['run']
             if run.status.status.value != 'Succeeded':
                 st.error(
@@ -76,6 +80,7 @@ def main():
         viewer(content=vtjks_file.read_bytes(), key='viz')
         process_summary(credits)
         process_space(space_summary)
+
 
 if __name__ == '__main__':
     main()
