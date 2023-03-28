@@ -8,20 +8,16 @@ def initialize():
     if 'target_folder' not in st.session_state:
         st.session_state.target_folder = Path(__file__).parent
 
-    if 'load_method' not in st.session_state:
-        st.session_state.active_option = 'Select study'
     if 'active_option' not in st.session_state:
-        st.session_state.active_option = 'Select study'
+        st.session_state.active_option = 'Load from project'
     if 'options' not in st.session_state:
-        st.session_state.options = ['Select study', 'Load from URL', 'Sample']
+        st.session_state.options = ['Load from project', 'Load from URL', 'Sample']
 
     query_params = st.experimental_get_query_params()
     if 'load_method' not in st.session_state:
         if 'url' in query_params:
-            st.session_state.load_method = 'Load from URL'
+            st.session_state.active_option = 'Load from URL'
             st.session_state.run_url = query_params['url'][0]
-        else:
-            st.session_state.load_method = 'Select study'
 
     if 'run_url' not in st.session_state:
         st.session_state.run_url = None
