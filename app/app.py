@@ -22,7 +22,7 @@ def main():
     
     # initialize session state variables
     initialize()
-    st.write(st.session_state.expanded)
+
     with st.expander('Load results', expanded=st.session_state.expanded):
         st.radio(
             'Load method', options=st.session_state.options,

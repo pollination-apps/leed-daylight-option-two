@@ -137,8 +137,8 @@ def select_menu(api_client: ApiClient, user: dict):
                 
                 if study and 'id' in study:
                     st.session_state['study_id'] = study['id']
-                    
-                    st.subheader('Select a run for study ' + study['id'] + ' :')
+
+                    st.subheader('Select a run:')
                     run = select_run(
                         'select-run',
                         api_client,
