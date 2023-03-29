@@ -1,5 +1,5 @@
 streamlit==1.17.0
 honeybee-display[full]==0.2.18
 pollination_streamlit_io>=0.51.3
-pollination_streamlit_viewer==0.4.7
+pollination_streamlit_viewer==0.4.8
 honeybee-radiance>=1.64.150
