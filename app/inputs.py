@@ -18,7 +18,7 @@ def initialize():
     query_params = st.experimental_get_query_params()
     if 'load_method' not in st.session_state:
         if 'url' in query_params:
-            st.session_state.active_option = 'Load from URL'
+            st.session_state.active_option = 'Load from a URL'
             st.session_state.run_url = query_params['url'][0]
 
     if 'run_url' not in st.session_state:

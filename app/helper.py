@@ -54,7 +54,7 @@ def download_files(run: Run) -> None:
 
     vs = model_to_vis_set(
         hb_model, color_by=None,
-        grid_data_path=str(data_folder), active_grid_data='illuminance-9am'
+        grid_data_path=str(data_folder), active_grid_data='pass-fail-combined'
     )
     vtk_vs = VTKVisualizationSet.from_visualization_set(vs)
     vtjks_file = Path(vtk_vs.to_vtkjs(folder=data_folder, name='vis_set'))
@@ -163,7 +163,7 @@ def select_menu(api_client: ApiClient, user: dict):
                         run_url = f'{run._client.host}/{run.owner}/projects/{run.project}/studies/{run.job_id}/runs/{run.id}'
                         st.experimental_set_query_params(url=run_url)
                         st.session_state.run_url = run_url
-                        st.session_state.active_option = 'Load from URL'
+                        st.session_state.active_option = 'Load from a URL'
                         st.session_state['run'] = run
                     else:
                         st.session_state['run'] = None
