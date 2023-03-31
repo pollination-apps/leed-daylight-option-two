@@ -66,10 +66,7 @@ def download_files(run: Run) -> None:
             for ds in geo.data_sets:
                 if ds.data_type.name in pf_studies:
                     ds.legend_parameters.ordinal_dictionary = ordinal_dictionary
-    for geo in vs.geometry:
-        if isinstance(geo, AnalysisGeometry):
-            for ds in geo.data_sets:
-                if ds.data_type.name in pf_studies:
+
     vtk_vs = VTKVisualizationSet.from_visualization_set(vs)
     vtjks_file = Path(vtk_vs.to_vtkjs(folder=data_folder, name='vis_set'))
 

@@ -2,13 +2,15 @@
 from ladybug.datatype.generic import GenericType
 from ladybug.datatype.illuminance import Illuminance
 from ladybug.legend import LegendParameters
-from ladybug.color import Colorset
+from ladybug.color import Colorset, Color
 
 
 def _leed_daylight_option_two_vis_metadata():
     """Return visualization metadata for LEED Daylight Option II."""
     ill_lpar = LegendParameters(min=300, max=3000, colors=Colorset.ecotect())
-    pass_fail_lpar = LegendParameters(min=0, max=1, segment_count=2, title='Pass/Fail')
+    colors = [Color(220, 0, 0), Color(0, 220, 0)]
+    pass_fail_lpar = \
+        LegendParameters(min=0, max=1, colors=colors, segment_count=2, title='Pass/Fail')
 
     metric_info_dict = {
         'illuminance-9am': {
