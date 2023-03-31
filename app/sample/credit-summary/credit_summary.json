@@ -1,14 +1,14 @@
 {
-    "sensor_count_passing": 826,
-    "sensor_count_passing_9AM": 835,
-    "sensor_count_passing_3PM": 864,
-    "total_sensor_count": 884,
-    "floor_area_passing": 206.5,
-    "floor_area_passing_9AM": 208.75,
-    "floor_area_passing_3PM": 216.0,
-    "total_floor_area": 221.0,
-    "percentage_passing": 93.43891402714932,
-    "percentage_passing_9AM": 94.45701357466064,
-    "percentage_passing_3PM": 97.73755656108597,
-    "credits": 3
+    "sensor_count_passing": 3837,
+    "sensor_count_passing_9AM": 4320,
+    "sensor_count_passing_3PM": 3845,
+    "total_sensor_count": 4472,
+    "floor_area_passing": 959.25,
+    "floor_area_passing_9AM": 1080.0,
+    "floor_area_passing_3PM": 961.25,
+    "total_floor_area": 1118.0,
+    "percentage_passing": 85.8005366726297,
+    "percentage_passing_9AM": 96.6010733452594,
+    "percentage_passing_3PM": 85.97942754919498,
+    "credits": 2
 }
