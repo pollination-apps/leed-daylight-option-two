@@ -8,7 +8,7 @@ from ladybug.color import Colorset
 def _leed_daylight_option_two_vis_metadata():
     """Return visualization metadata for LEED Daylight Option II."""
     ill_lpar = LegendParameters(min=300, max=3000, colors=Colorset.ecotect())
-    pass_fail_lpar = LegendParameters(min=0, max=1, colors=Colorset.ecotect())
+    pass_fail_lpar = LegendParameters(min=0, max=1, segment_count=2, title='Pass/Fail')
 
     metric_info_dict = {
         'illuminance-9am': {

@@ -1,25 +1,280 @@
 [
   {
-    "count": 416,
-    "name": "TestRoom_1",
-    "identifier": "TestRoom_1",
+    "count": 220,
+    "name": "Room_1",
+    "identifier": "Room_1",
     "group": "",
-    "full_id": "TestRoom_1",
+    "full_id": "Room_1",
     "light_path": [
       [
-        "__static_apertures__"
+        "Room_1_Skylight"
+      ],
+      [
+        "Room_1_North"
+      ],
+      [
+        "Room_1_East"
       ]
     ]
   },
   {
-    "count": 468,
-    "name": "TestRoom_2",
-    "identifier": "TestRoom_2",
+    "count": 160,
+    "name": "Room_2",
+    "identifier": "Room_2",
     "group": "",
-    "full_id": "TestRoom_2",
+    "full_id": "Room_2",
     "light_path": [
       [
-        "__static_apertures__"
+        "Room_2_East"
+      ],
+      [
+        "Room_2_South"
+      ],
+      [
+        "Room_2_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_3",
+    "identifier": "Room_3",
+    "group": "",
+    "full_id": "Room_3",
+    "light_path": [
+      [
+        "Room_3_South"
+      ],
+      [
+        "Room_3_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_4",
+    "identifier": "Room_4",
+    "group": "",
+    "full_id": "Room_4",
+    "light_path": [
+      [
+        "Room_4_East"
+      ],
+      [
+        "Room_4_North"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_5",
+    "identifier": "Room_5",
+    "group": "",
+    "full_id": "Room_5",
+    "light_path": [
+      [
+        "Room_5_Skylight"
+      ],
+      [
+        "Room_5_North"
+      ],
+      [
+        "Room_5_East"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_6",
+    "identifier": "Room_6",
+    "group": "",
+    "full_id": "Room_6",
+    "light_path": [
+      [
+        "Room_6_South"
+      ],
+      [
+        "Room_6_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_7",
+    "identifier": "Room_7",
+    "group": "",
+    "full_id": "Room_7",
+    "light_path": [
+      [
+        "Room_7_Skylight"
+      ],
+      [
+        "Room_7_North"
+      ],
+      [
+        "Room_7_East"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_8",
+    "identifier": "Room_8",
+    "group": "",
+    "full_id": "Room_8",
+    "light_path": [
+      [
+        "Room_8_West"
+      ],
+      [
+        "Room_8_North"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_9",
+    "identifier": "Room_9",
+    "group": "",
+    "full_id": "Room_9",
+    "light_path": [
+      [
+        "Room_9_Skylight"
+      ],
+      [
+        "Room_9_North"
+      ],
+      [
+        "Room_9_West"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_10",
+    "identifier": "Room_10",
+    "group": "",
+    "full_id": "Room_10",
+    "light_path": [
+      [
+        "Room_10_South"
+      ],
+      [
+        "Room_10_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_11",
+    "identifier": "Room_11",
+    "group": "",
+    "full_id": "Room_11",
+    "light_path": [
+      [
+        "Room_11_South"
+      ],
+      [
+        "Room_11_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_12",
+    "identifier": "Room_12",
+    "group": "",
+    "full_id": "Room_12",
+    "light_path": [
+      [
+        "Room_12_East"
+      ],
+      [
+        "Room_12_North"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_13",
+    "identifier": "Room_13",
+    "group": "",
+    "full_id": "Room_13",
+    "light_path": [
+      [
+        "Room_13_Skylight"
+      ],
+      [
+        "Room_13_North"
+      ],
+      [
+        "Room_13_East"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_14",
+    "identifier": "Room_14",
+    "group": "",
+    "full_id": "Room_14",
+    "light_path": [
+      [
+        "Room_14_Skylight"
+      ],
+      [
+        "Room_14_North"
+      ],
+      [
+        "Room_14_West"
+      ]
+    ]
+  },
+  {
+    "count": 220,
+    "name": "Room_15",
+    "identifier": "Room_15",
+    "group": "",
+    "full_id": "Room_15",
+    "light_path": [
+      [
+        "Room_15_Skylight"
+      ],
+      [
+        "Room_15_North"
+      ],
+      [
+        "Room_15_East"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_16",
+    "identifier": "Room_16",
+    "group": "",
+    "full_id": "Room_16",
+    "light_path": [
+      [
+        "Room_16_South"
+      ],
+      [
+        "Room_16_South_Upper"
+      ]
+    ]
+  },
+  {
+    "count": 352,
+    "name": "Room_17",
+    "identifier": "Room_17",
+    "group": "",
+    "full_id": "Room_17",
+    "light_path": [
+      [
+        "Room_17_South"
+      ],
+      [
+        "Room_17_South_Upper"
       ]
     ]
   }

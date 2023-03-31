@@ -12,6 +12,7 @@ from pollination_streamlit_io import (select_account, select_project,
                                       select_study, select_run)
 from honeybee_display.model import model_to_vis_set
 from ladybug_vtk.visualization_set import VisualizationSet as VTKVisualizationSet
+from ladybug_display.visualization import AnalysisGeometry, VisualizationData
 
 from vis_metadata import _leed_daylight_option_two_vis_metadata
 
@@ -56,6 +57,20 @@ def download_files(run: Run) -> None:
         hb_model, color_by=None,
         grid_data_path=str(data_folder), active_grid_data='pass-fail-combined'
     )
+    
+    # this may not be the best way to do it, but it works
+    pf_studies = ['Pass/Fail', 'Pass/Fail 9am', 'Pass/Fail 3pm']
+    ordinal_dictionary = {0: 'Fail', 1: 'Pass'}
+    for geo in vs.geometry:
+        if isinstance(geo, AnalysisGeometry):
+            for ds in geo.data_sets:
+                if ds.data_type.name in pf_studies:
+                    ds.legend_parameters.ordinal_dictionary = ordinal_dictionary
+    for geo in vs.geometry:
+        if isinstance(geo, AnalysisGeometry):
+            for ds in geo.data_sets:
+                if ds.data_type.name in pf_studies:
+                    print(ds.legend_parameters.ordinal_dictionary)
     vtk_vs = VTKVisualizationSet.from_visualization_set(vs)
     vtjks_file = Path(vtk_vs.to_vtkjs(folder=data_folder, name='vis_set'))
 
@@ -160,7 +175,9 @@ def select_menu(api_client: ApiClient, user: dict):
                         run_id = run['id']
                         run = Run(project_owner, project_name,
                                   job_id, run_id, api_client)
-                        run_url = f'{run._client.host}/{run.owner}/projects/{run.project}/studies/{run.job_id}/runs/{run.id}'
+                        run_url = (f'{run._client.host}/{run.owner}/projects/'
+                                   f'{run.project}/studies/{run.job_id}/runs/'
+                                   f'{run.id}')
                         st.experimental_set_query_params(url=run_url)
                         st.session_state.run_url = run_url
                         st.session_state.active_option = 'Load from a URL'
