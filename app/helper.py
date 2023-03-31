@@ -57,7 +57,7 @@ def download_files(run: Run) -> None:
         hb_model, color_by=None,
         grid_data_path=str(data_folder), active_grid_data='pass-fail-combined'
     )
-    
+
     # this may not be the best way to do it, but it works
     pf_studies = ['Pass/Fail', 'Pass/Fail 9am', 'Pass/Fail 3pm']
     ordinal_dictionary = {0: 'Fail', 1: 'Pass'}
@@ -70,7 +70,6 @@ def download_files(run: Run) -> None:
         if isinstance(geo, AnalysisGeometry):
             for ds in geo.data_sets:
                 if ds.data_type.name in pf_studies:
-                    print(ds.legend_parameters.ordinal_dictionary)
     vtk_vs = VTKVisualizationSet.from_visualization_set(vs)
     vtjks_file = Path(vtk_vs.to_vtkjs(folder=data_folder, name='vis_set'))
 
