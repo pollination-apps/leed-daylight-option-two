@@ -115,8 +115,7 @@ jobs:
   deploy-to-pollination:
     name: Deploy to Pollination
     runs-on: ubuntu-latest
-    needs: release-on-github
-    if: ${{github.ref == 'refs/heads/production' && github.event.repository.owner.name == 'pollination-apps' && contains(needs.release-on-github.outputs.tag, '.')}}
+    if: github.ref == 'refs/heads/production' && github.event.repository.owner.name == 'pollination-apps'
     steps:
       - uses: actions/checkout@v2
         with:
