@@ -66,9 +66,9 @@ def main():
                     f'recipe. The input run is using {run.recipe.owner}/{run.recipe.name}.'
                 )
                 st.stop()
-            if version.parse(run.recipe.tag) < version.parse('0.3.4'):
+            if version.parse(run.recipe.tag) < version.parse('0.3.5'):
                 st.error(
-                    'Only versions pollination/leed-daylight-option-two:0.3.4 or higher '
+                    'Only versions pollination/leed-daylight-option-two:0.3.5 or higher '
                     f'are valid. Current version of the recipe: {run.recipe.tag}.'
                 )
                 st.stop()
