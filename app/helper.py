@@ -12,7 +12,7 @@ from pollination_streamlit_io import (select_account, select_project,
                                       select_study, select_run)
 from honeybee_display.model import model_to_vis_set
 from ladybug_vtk.visualization_set import VisualizationSet as VTKVisualizationSet
-from ladybug_display.visualization import AnalysisGeometry, VisualizationData
+from ladybug_display.visualization import AnalysisGeometry
 
 from vis_metadata import _leed_daylight_option_two_vis_metadata
 
@@ -35,7 +35,7 @@ def download_files(run: Run) -> None:
     model_dict = json.load(run.job.download_artifact(info.model))
     hb_model = Model.from_dict(model_dict)
 
-    data_folder = Path(f'{st.session_state.target_folder}/data')
+    data_folder = Path(f'{st.session_state.target_folder}/data').joinpath(run.id)
     outputs = [
         'illuminance-9am', 'illuminance-3pm', 'pass-fail-9am', 'pass-fail-3pm',
         'pass-fail-combined', 'credit-summary', 'space-summary'
@@ -182,13 +182,12 @@ def select_menu(api_client: ApiClient, user: dict):
                         st.session_state['run'] = None
 
 
-def load_sample():
-    sample_folder = Path(f'{st.session_state.target_folder}/sample')
-    with open(sample_folder.joinpath('credit-summary', 'credit_summary.json')) as json_file:
+def load_from_folder(folder: Path):
+    with open(folder.joinpath('credit-summary', 'credit_summary.json')) as json_file:
         credits = json.load(json_file)
-    space_summary = sample_folder.joinpath(
+    space_summary = folder.joinpath(
         'space-summary', 'space_summary.csv')
 
-    vtjks_file = Path(sample_folder, 'vis_set.vtkjs')
+    vtjks_file = Path(folder, 'vis_set.vtkjs')
 
     return vtjks_file, credits, space_summary
