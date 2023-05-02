@@ -1,6 +1,7 @@
 """Pollination LEED Daylight Option II App."""
 import streamlit as st
 from packaging import version
+from pathlib import Path
 
 from pollination_streamlit.selectors import get_api_client, run_selector
 from pollination_streamlit_io import auth_user
@@ -8,7 +9,7 @@ from pollination_streamlit_viewer import viewer
 
 from helper import (
     download_files, select_menu, leed_credits, process_summary, process_space,
-    load_sample)
+    load_from_folder)
 from inputs import initialize
 
 
@@ -46,7 +47,8 @@ def main():
                 st.session_state['run'] = run
         else:
             # get sample files
-            vtjks_file, credits, space_summary = load_sample()
+            vtjks_file, credits, space_summary = \
+                load_from_folder(st.session_state.target_folder.joinpath('sample'))
 
     if st.session_state['run'] is not None \
             or st.session_state['load_method'] == 'Try the sample run':
@@ -73,8 +75,15 @@ def main():
                 )
                 st.stop()
 
-            with st.spinner('Downloading files...'):
-                vtjks_file, credits, space_summary = download_files(run)
+            if st.session_state.run_url:
+                run_id = st.session_state.run_url.split('/')[-1]
+                run_folder = Path(st.session_state['target_folder'].joinpath('data', run_id))
+            if run_folder.exists():
+                vtjks_file, credits, space_summary = \
+                    load_from_folder(run_folder)
+            else:
+                with st.spinner('Downloading files...'):
+                    vtjks_file, credits, space_summary = download_files(run)
 
         leed_credits(credits)
         viewer(content=vtjks_file.read_bytes(), key='viz')
