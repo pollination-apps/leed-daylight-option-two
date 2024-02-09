@@ -1,4 +1,4 @@
-"""Functions to support the leed-daylight-option-one app."""
+"""Functions to support the leed-daylight-option-two app."""
 import zipfile
 import json
 import pandas as pd
